@@ -5,7 +5,7 @@ import os
 from TRE import kb
 from utils import initializeFirebase
 from utils import FirebaseFunc
-
+from utils import colorDetect
 
 def urllib_download(IMAGE_URL):
     from urllib.request import urlretrieve
@@ -32,9 +32,17 @@ class Recommendation(APIView):
             print('user_val => ', user.val())
 
             ### The cloth information should be extracted in ML server
-            cloth_type = req['cloth_type']
-            cloth_info = req[cloth_type]
-            color = cloth_info['color']
+            #cloth_type = req['cloth_type']
+            #cloth_info = req[cloth_type]
+            #color = cloth_info['color']
+
+            ### Call the color matching algorithm
+            colorTbl = colorDetect.getColorTable('./utils/color.json')
+            #print('colorTbl => ', colorTbl)
+            color, rgb = colorDetect.getColor('./image/img1.png', colorTbl)
+            #print('color => ', color)
+            color =  colorDetect.getColorMapping(color)
+            print('color => ', color)
 
             colors_inside_wardrobe = []
 
@@ -60,6 +68,7 @@ class Recommendation(APIView):
             ### inference part
             for colorDbClass in color_popularity_sorted:
                 p1 = colorDbClass
+                print('p1.fact => ',p1.fact)
                 if color in p1.fact:
                     if color == p1.fact[0]:
                         matchColor = p1.fact[1]
@@ -76,8 +85,11 @@ class Recommendation(APIView):
                     if matchCloth:
                         break
 
+            print('is it here ????')
+
             if matchCloth == None:
                 for nogood in color_nogood_facts:
+                    print('nogood => ', nogood)
                     if color in nogood:
                         if color == nogood[0]:
                             colors_inside_wardrobe.remove(nogood[1])
@@ -85,7 +97,7 @@ class Recommendation(APIView):
                             colors_inside_wardrobe.remove(nogood[0])
 
                 for item in user.val()['items']:
-                    if item['color'] == colors_inside_wardrobe[0]:
+                    if item and item['color'] == colors_inside_wardrobe[0]:
                         matchCloth = item
                         break
 
@@ -94,6 +106,7 @@ class Recommendation(APIView):
 
             req['matchCloth'] = matchCloth
 
+            req['colorPredict'] = color
             print('req => ', req)
             #print('color_popularity_sorted => ', color_popularity_sorted)
             #print('color_nogood_facts => ', color_nogood_facts)
