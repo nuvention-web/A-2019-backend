@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bb516396-200e-40ea-ac55-44d708da7d18" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/utils/FirebaseConfig.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/FirebaseFunc.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/initializeFirebase.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/testFirebase.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/testsite.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/testsite.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Matching/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Matching/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TRE/testFirebase.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRE/kb.py" beforeDir="false" afterPath="$PROJECT_DIR$/TRE/kb.py" afterDir="false" />
     </list>
     <ignored path="profashion-firebase-adminsdk-vf1ta-35e8761196.json" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,8 +17,8 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/testsite$ltreex1.coverage" NAME="ltreex1 Coverage Results" MODIFIED="1555813535373" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TRE" />
     <SUITE FILE_PATH="coverage/testsite$initializeFirebase.coverage" NAME="initializeFirebase Coverage Results" MODIFIED="1555981881909" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
-    <SUITE FILE_PATH="coverage/testsite$testFirebase.coverage" NAME="testFirebase Coverage Results" MODIFIED="1555988265733" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TRE" />
-    <SUITE FILE_PATH="coverage/testsite$kb.coverage" NAME="kb Coverage Results" MODIFIED="1555856282122" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TRE" />
+    <SUITE FILE_PATH="coverage/testsite$testFirebase.coverage" NAME="testFirebase Coverage Results" MODIFIED="1555989342963" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TRE" />
+    <SUITE FILE_PATH="coverage/testsite$kb.coverage" NAME="kb Coverage Results" MODIFIED="1555989588579" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TRE" />
   </component>
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
@@ -57,35 +52,18 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="4952" />
+          <entry key="py" value="5832" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="4952" />
+          <entry key="Python" value="5832" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TRE/dds.py">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Matching/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="45" column="67" lean-forward="true" selection-start-line="45" selection-start-column="67" selection-end-line="45" selection-end-column="67" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/testFirebase.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -107,24 +85,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils/initializeFirebase.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Matching/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="5" column="5" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
+            <state relative-caret-position="542">
+              <caret line="106" column="42" selection-start-line="106" selection-start-column="42" selection-end-line="106" selection-end-column="42" />
               <folding>
-                <element signature="e#0#15#0" expanded="true" />
-                <marker date="1555984262322" expanded="true" signature="69:70" ph="..." />
+                <element signature="e#0#11#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils/FirebaseConfig.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="7" column="24" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -132,21 +100,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TRE/kb.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
+            <state relative-caret-position="192">
+              <caret line="15" column="13" lean-forward="true" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
               <folding>
-                <marker date="1555858701004" expanded="true" signature="173:175" ph="..." />
-                <marker date="1555858701004" expanded="true" signature="1158:1159" ph="..." />
+                <marker date="1555989588570" expanded="true" signature="173:175" ph="..." />
+                <marker date="1555989588570" expanded="true" signature="1155:1156" ph="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TRE/myglobal.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="14" selection-start-column="14" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -181,12 +140,12 @@
         <option value="$PROJECT_DIR$/TRE/ltreex1.py" />
         <option value="$PROJECT_DIR$/TRE/ldata.py" />
         <option value="$PROJECT_DIR$/Matching/urls.py" />
-        <option value="$PROJECT_DIR$/TRE/kb.py" />
         <option value="$PROJECT_DIR$/TRE/testFirebase.py" />
         <option value="$PROJECT_DIR$/utils/FirebaseConfig.py" />
         <option value="$PROJECT_DIR$/utils/initializeFirebase.py" />
         <option value="$PROJECT_DIR$/utils/FirebaseFunc.py" />
         <option value="$PROJECT_DIR$/utils/testFirebase.py" />
+        <option value="$PROJECT_DIR$/TRE/kb.py" />
         <option value="$PROJECT_DIR$/Matching/views.py" />
       </list>
     </option>
@@ -337,7 +296,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.testFirebase">
+  <component name="RunManager" selected="Python.kb">
     <configuration name="initializeFirebase" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="testsite" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -459,9 +418,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.kb" />
         <item itemvalue="Python.testFirebase" />
         <item itemvalue="Python.initializeFirebase" />
-        <item itemvalue="Python.kb" />
         <item itemvalue="Python.ltreex1" />
       </list>
     </recent_temporary>
@@ -605,31 +564,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TRE/dds.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Matching/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
           <caret line="5" column="41" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TRE/myglobal.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="14" selection-start-column="14" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TRE/kb.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
-          <folding>
-            <marker date="1555858701004" expanded="true" signature="173:175" ph="..." />
-            <marker date="1555858701004" expanded="true" signature="1158:1159" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -650,6 +588,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pyrebase/pyrebase.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="312" column="8" selection-start-line="312" selection-start-column="8" selection-end-line="312" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/utils/FirebaseConfig.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
@@ -657,10 +602,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pyrebase/pyrebase.py">
+    <entry file="file://$PROJECT_DIR$/utils/initializeFirebase.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="312" column="8" selection-start-line="312" selection-start-column="8" selection-end-line="312" selection-end-column="8" />
+        <state relative-caret-position="95">
+          <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+            <marker date="1555984262322" expanded="true" signature="69:70" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TRE/myglobal.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="14" selection-start-column="14" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TRE/dds.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-150" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/testFirebase.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="62" column="24" selection-start-line="62" selection-start-column="24" selection-end-line="62" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -674,28 +642,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/initializeFirebase.py">
+    <entry file="file://$PROJECT_DIR$/TRE/kb.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="5" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
+        <state relative-caret-position="192">
+          <caret line="15" column="13" lean-forward="true" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
-            <marker date="1555984262322" expanded="true" signature="69:70" ph="..." />
+            <marker date="1555989588570" expanded="true" signature="173:175" ph="..." />
+            <marker date="1555989588570" expanded="true" signature="1155:1156" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/testFirebase.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="401">
-          <caret line="62" column="24" selection-start-line="62" selection-start-column="24" selection-end-line="62" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Matching/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="45" column="67" lean-forward="true" selection-start-line="45" selection-start-column="67" selection-end-line="45" selection-end-column="67" />
+        <state relative-caret-position="542">
+          <caret line="106" column="42" selection-start-line="106" selection-start-column="42" selection-end-line="106" selection-end-column="42" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>

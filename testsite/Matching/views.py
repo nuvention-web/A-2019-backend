@@ -36,18 +36,66 @@ class Recommendation(APIView):
             cloth_info = req[cloth_type]
             color = cloth_info['color']
 
+            colors_inside_wardrobe = []
+
             if 'items' not in user.val():
                 data = user.val()
                 t_data = {'items': {'0': {'color': color, 'img_url': img_url}}}
                 data.update(t_data)
                 db.child("users").child(user.key()).set(data)
             else:
+                ### save the color already exists to the list
+                for item in user.val()['items']:
+                    colors_inside_wardrobe.append(item['color'])
+
                 user.val()['items'].append({'color': color, 'img_url': img_url})
                 db.child("users").child(user.key()).set(user.val())
 
             kb_facts = kb.createKB()
             color_popularity_sorted = kb_facts['color_popularity_sorted']
             color_nogood_facts = kb_facts['color_nogood_facts']
+
+            matchCloth = None
+            ### inference part
+            for colorDbClass in color_popularity_sorted:
+                p1 = colorDbClass
+                if color in p1.fact:
+                    if color == p1.fact[0]:
+                        matchColor = p1.fact[1]
+                    else:
+                        matchColor = p1.fact[0]
+
+                    if matchColor == '*':
+                        matchColor = colors_inside_wardrobe[0]
+                    if matchColor in colors_inside_wardrobe:
+                        for item in user.val()['items']:
+                            if item['color'] == matchColor:
+                                matchCloth = item
+                                break
+                        if matchCloth:
+                            break
+
+            if matchCloth == None:
+                for nogood in color_nogood_facts:
+                    if color in nogood:
+                        if color == nogood[0]:
+                            colors_inside_wardrobe.remove(nogood[1])
+                        else:
+                            colors_inside_wardrobe.remove(nogood[0])
+
+                for item in user.val()['items']:
+                    if item['color'] == colors_inside_wardrobe[0]:
+                        matchCloth = item
+                        break
+
+
+            print('matchCloth => ', matchCloth)
+
+            req['matchCloth'] = matchCloth
+
+            print('req => ', req)
+            #print('color_popularity_sorted => ', color_popularity_sorted)
+            #print('color_nogood_facts => ', color_nogood_facts)
             
 
         except:
@@ -56,4 +104,4 @@ class Recommendation(APIView):
 
         #jo = json.dumps(request.body)
 
-        return HttpResponse(jsonstr)
+        return HttpResponse(json.dumps(req))

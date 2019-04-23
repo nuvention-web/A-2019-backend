@@ -40,9 +40,9 @@ sorted_x = sorted(x, key=operator.attrgetter('popularity'), reverse=True)
 
 for fact in sorted_x:
     p1 = fact
-    #print('fact => ', p1.fact)
-    #print('popularity => ', p1.popularity)
-    #print('===============')
+    print('fact => ', p1.fact)
+    print('popularity => ', p1.popularity)
+    print('===============')
 
 
 def createKB():
