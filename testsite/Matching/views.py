@@ -5,7 +5,7 @@ import os
 from TRE import kb
 from utils import initializeFirebase
 from utils import FirebaseFunc
-import pyrebase
+
 
 def urllib_download(IMAGE_URL):
     from urllib.request import urlretrieve
@@ -46,7 +46,8 @@ class Recommendation(APIView):
             else:
                 ### save the color already exists to the list
                 for item in user.val()['items']:
-                    colors_inside_wardrobe.append(item['color'])
+                    if item:
+                        colors_inside_wardrobe.append(item['color'])
 
                 user.val()['items'].append({'color': color, 'img_url': img_url})
                 db.child("users").child(user.key()).set(user.val())
@@ -67,13 +68,13 @@ class Recommendation(APIView):
 
                     if matchColor == '*':
                         matchColor = colors_inside_wardrobe[0]
-                    if matchColor in colors_inside_wardrobe:
-                        for item in user.val()['items']:
-                            if item['color'] == matchColor:
-                                matchCloth = item
-                                break
-                        if matchCloth:
+
+                    for item in user.val()['items']:
+                        if item and item['color'] == matchColor:
+                            matchCloth = item
                             break
+                    if matchCloth:
+                        break
 
             if matchCloth == None:
                 for nogood in color_nogood_facts:
