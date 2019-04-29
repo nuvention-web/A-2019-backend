@@ -6,6 +6,7 @@ import os
 from TRE import kb
 from utils import initializeFirebase
 from utils import colorDetect
+import prediction
 
 def urllib_download(IMAGE_URL):
     from urllib.request import urlretrieve
@@ -45,7 +46,6 @@ class Recommendation(APIView):
         print('color => ', color)
 
         print('#### Start ML Part ####')
-        """
         answer_lst = prediction.predict(["collar_design_labels", "skirt_length_labels", "coat_length_labels",
                                          "lapel_design_labels", "neck_design_labels", "neckline_design_labels",
                                          "pant_length_labels", "sleeve_length_labels"], ["./image/img1.png"])
@@ -59,7 +59,6 @@ class Recommendation(APIView):
         req['neckline_design_labels'] = answer_lst[0]['neckline_design_labels']
         req['pant_length_labels'] = answer_lst[0]['pant_length_labels']
         req['sleeve_length_labels'] = answer_lst[0]['sleeve_length_labels']
-        """
 
         colors_inside_wardrobe = []
 
