@@ -17,6 +17,7 @@
 
 import pyrebase
 
+
 config = {
     "apiKey": "AIzaSyBR_Uy5rZW-lvfq_aaDzM-yZP3H_NWCMSg",
     "authDomain": "profashion.firebaseapp.com",
@@ -26,43 +27,18 @@ config = {
 }
 
 firebase = pyrebase.initialize_app(config)
-print('firebase => ', firebase)
 
 db = firebase.database()
 all_users = db.child("users").get()
 
-"""
-for user in all_users.each():
-    print('user => ', user)
-    print('user key => ', user.key())
-    print('user value => ', user.val())
-    json = user.val()
-    if 'items' in json:
-        json = json['items']
-        print('json => ', json)
-"""
 
 tmp_user = None
 
 for user in all_users.each():
-    if 'Cathy' == user.val()['username']:
-        print('success!!!')
-        tmp_user = user
-        break
+    print('user key???? = ', user.key())
 
-print('tmp_user => ', tmp_user)
-
-if 'items' not in tmp_user.val():
-    data = tmp_user.val()
-
-    idx = 0
-
-    t_data = {'items': {idx: {'color': 'red', 'img_url': 'www.google.com'}}}
-    data.update(t_data)
-    print('data => ', data)
-    db.child("users").child("1").set(data)
-else:
-    data = user.val()['items']
-    user.val()['items'].append({'color': 'yellow', 'img_url': 'www.kfc.com'})
-    print('data => ', data)
-    #db.child("users").child(user.key()).set(data)
+users_by_name = db.child("users").order_by_child("username").equal_to("Cathy").get()
+print('userByName => ', users_by_name.key())
+for user in users_by_name.each():
+    print('user key => ', user.key())
+    print('user value => ', user.val())

@@ -5,11 +5,7 @@ from rest_framework.views import APIView
 import os
 from TRE import kb
 from utils import initializeFirebase
-from utils import FirebaseFunc
 from utils import colorDetect
-#from Matching.ML import ttt
-#from Matching.ML.prediction import predict
-import prediction
 
 def urllib_download(IMAGE_URL):
     from urllib.request import urlretrieve
@@ -30,15 +26,15 @@ class Recommendation(APIView):
         img_url = req['img_url']
         urllib_download(img_url)
 
-        user_name = req['user_name']
-        print('user_name => ', user_name)
-        user = FirebaseFunc.getUserByName(db, user_name)
+        dbKey = req['dbkey']
+        print('dbKey => ', dbKey)
+        user = None
+        for tuser in db.child("users").get():
+            if tuser.key() == dbKey:
+                user = tuser
+                break
         print('user_val => ', user.val())
 
-        ### The cloth information should be extracted in ML server
-        # cloth_type = req['cloth_type']
-        # cloth_info = req[cloth_type]
-        # color = cloth_info['color']
 
         ### Call the color matching algorithm
         colorTbl = colorDetect.getColorTable('./utils/color.json')
@@ -48,7 +44,8 @@ class Recommendation(APIView):
         color = colorDetect.getColorMapping(color)
         print('color => ', color)
 
-        print('is it here?')
+        print('#### Start ML Part ####')
+        """
         answer_lst = prediction.predict(["collar_design_labels", "skirt_length_labels", "coat_length_labels",
                                          "lapel_design_labels", "neck_design_labels", "neckline_design_labels",
                                          "pant_length_labels", "sleeve_length_labels"], ["./image/img1.png"])
@@ -62,8 +59,7 @@ class Recommendation(APIView):
         req['neckline_design_labels'] = answer_lst[0]['neckline_design_labels']
         req['pant_length_labels'] = answer_lst[0]['pant_length_labels']
         req['sleeve_length_labels'] = answer_lst[0]['sleeve_length_labels']
-
-        #ttt.predict()
+        """
 
         colors_inside_wardrobe = []
 
@@ -129,9 +125,5 @@ class Recommendation(APIView):
         req['colorPredict'] = color
 
         print('req => ', req)
-        # print('color_popularity_sorted => ', color_popularity_sorted)
-        # print('color_nogood_facts => ', color_nogood_facts)
-
-        # jo = json.dumps(request.body)
 
         return HttpResponse(json.dumps(req))
