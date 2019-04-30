@@ -36,14 +36,15 @@ class Recommendation(APIView):
                 break
         print('user_val => ', user.val())
 
+        clothType = req['type']
+
 
         ### Call the color matching algorithm
         colorTbl = colorDetect.getColorTable('./utils/color.json')
-        # print('colorTbl => ', colorTbl)
         color, rgb = colorDetect.getColor('./image/img1.png', colorTbl)
-        # print('color => ', color)
         color = colorDetect.getColorMapping(color)
         print('color => ', color)
+
 
         print('#### Start ML Part ####')
         answer_lst = prediction.predict(["collar_design_labels", "skirt_length_labels", "coat_length_labels",
@@ -51,20 +52,25 @@ class Recommendation(APIView):
                                          "pant_length_labels", "sleeve_length_labels"], ["./image/img1.png"])
         print('answer_lst => ', answer_lst)
 
-        req['collar_design_labels'] = answer_lst[0]['collar_design_labels']
-        req['skirt_length_labels'] = answer_lst[0]['skirt_length_labels']
-        req['coat_length_labels'] = answer_lst[0]['coat_length_labels']
-        req['lapel_design_labels'] = answer_lst[0]['lapel_design_labels']
-        req['neck_design_labels'] = answer_lst[0]['neck_design_labels']
-        req['neckline_design_labels'] = answer_lst[0]['neckline_design_labels']
-        req['pant_length_labels'] = answer_lst[0]['pant_length_labels']
-        req['sleeve_length_labels'] = answer_lst[0]['sleeve_length_labels']
+        req['labels'] = {
+            'collar_design_labels' : answer_lst[0]['collar_design_labels'],
+            'skirt_length_labels' : answer_lst[0]['skirt_length_labels'],
+            'coat_length_labels' : answer_lst[0]['coat_length_labels'],
+            'lapel_design_labels' : answer_lst[0]['lapel_design_labels'],
+            'neck_design_labels' : answer_lst[0]['neck_design_labels'],
+            'neckline_design_labels' : answer_lst[0]['neckline_design_labels'],
+            'pant_length_labels' : answer_lst[0]['pant_length_labels'],
+            'sleeve_length_labels' : answer_lst[0]['sleeve_length_labels']
+        }
+
+        ############### ML Part End ################
+
 
         colors_inside_wardrobe = []
 
         if 'items' not in user.val():
             data = user.val()
-            t_data = {'items': {'0': {'color': color, 'img_url': img_url}}}
+            t_data = {'items': {'0': {'color': color, 'img_url': img_url, 'type': clothType}}}
             data.update(t_data)
             db.child("users").child(user.key()).set(data)
         else:
@@ -73,7 +79,7 @@ class Recommendation(APIView):
                 if item:
                     colors_inside_wardrobe.append(item['color'])
 
-            user.val()['items'].append({'color': color, 'img_url': img_url})
+            user.val()['items'].append({'color': color, 'img_url': img_url, 'type': clothType})
             db.child("users").child(user.key()).set(user.val())
 
         kb_facts = kb.createKB()
@@ -101,7 +107,6 @@ class Recommendation(APIView):
                 if matchCloth:
                     break
 
-        print('is it here ????')
 
         if matchCloth == None:
             for nogood in color_nogood_facts:
@@ -121,7 +126,7 @@ class Recommendation(APIView):
 
         req['matchCloth'] = matchCloth
 
-        req['colorPredict'] = color
+        req['labels']['colorPredict'] = color
 
         print('req => ', req)
 
