@@ -40,15 +40,16 @@ def getColorMapping(color):
 		'red': ['LightPink', 'Pink', 'Crimson', 'HotPink', 'DeepPink', 'Orchid', 'Thistle', 'Plum', 'Magenta', 'DarkMagenta',
 				'PeachPuff', 'LightSalmon', 'OrangeRed', 'DarkSalmon', 'Tomato', 'MistyRose', 'LightCoral',
 				'RosyBrown', 'IndianRed', 'Red', 'FireBrick', 'DarkRed'],
-		'purple': ['LavenderBlush', 'PaleVioletRed', 'MediumVioletRed', 'Violet', 'Purple', 'MediumOrchid', 'DarkViolet', 'DarkOrchid',
-				   'Indigo', 'BlueViolet', 'MediumPurple' ],
+		'purple': ['LavenderBlush', 'PaleVioletRed', 'MediumVioletRed', 'Violet', 'Purple', 'MediumOrchid', 'DarkViolet',
+				   'DarkOrchid', 'Indigo', 'BlueViolet', 'MediumPurple' ],
 		'blue': ['MediumSlateBlue', 'SlateBlue', 'DarkSlateBlue', 'Lavender', 'Blue', 'MediumBlue', 'MidnightBlue', 'DarkBlue',
 				 'Navy', 'RoyalBlue', 'CornflowerBlue', 'LightSteelBlue', 'DodgerBlue',
 				 'AliceBlue', 'SteelBlue', 'LightSkyBlue', 'SkyBlue', 'DeepSkyBlue', 'LightBlue', 'PowderBlue',
 				 'CadetBlue', 'Azure', 'PaleTurquoise', 'Aqua', 'DarkTurquoise', 'MediumTurquoise',
 				 'Aquamarine', 'MediumAquamarine'],
 		'gray': ['SlateGray', 'LightSlateGray', 'DarkSlateGray', 'Gainsboro', 'LightGrey', 'Silver',
-				'DarkGray', 'Gray', 'DimGray', 'Black'],
+				'DarkGray', 'Gray', 'DimGray'],
+		'black': ['Black'],
 		'green': ['LightCyan', 'Cyan', 'DarkCyan', 'Teal', 'LightSeaGreen', 'Turquoise', 'MediumSpringGreen',
 				  'SpringGreen', 'MediumSeaGreen', 'SeaGreen', 'LightGreen', 'PaleGreen',
 				  'DarkSeaGreen', 'LimeGreen', 'Lime', 'ForestGreen', 'Green', 'DarkGreen', 'Chartreuse',
@@ -68,7 +69,7 @@ def getColorMapping(color):
 
 if __name__ == '__main__':
 	colorTbl = getColorTable('color.json')
-	print(getColorTable('color.json'))
+	print(colorTbl)
 	color, rgb = getColor('../image/img1.png', colorTbl)
 	print('color => ', color)
 	print('rgb => ', rgb)

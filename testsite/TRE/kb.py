@@ -12,9 +12,12 @@ class ColorsDbClass(object):
 ## General rules about colors
 facts = [
     {'fact': [':not', ['red', 'green']]},
+    {'fact': [':not', ['green', 'blue']]},
+    {'fact': [':not', ['red', 'blue']]},
+    {'fact': [':not', ['purple', 'blue']]},
     {'fact':['black', '*'], 'popularity': 0.80},
     {'fact': ['white', '*'], 'popularity': 0.95},
-    {'fact': ['gray', 'white'], 'popularity': 0.93}
+    {'fact': ['gray', 'white'], 'popularity': 0.93},
 ]
 
 # if has weather, we can use implies => to infer about the suitable color in specific season

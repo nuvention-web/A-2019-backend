@@ -6,6 +6,7 @@ import os
 from TRE import kb
 from utils import initializeFirebase
 from utils import colorDetect
+import random
 import prediction
 
 def urllib_download(IMAGE_URL):
@@ -28,7 +29,6 @@ class Recommendation(APIView):
         urllib_download(img_url)
 
         dbKey = req['dbkey']
-        print('dbKey => ', dbKey)
         user = None
         for tuser in db.child("users").get():
             if tuser.key() == dbKey:
@@ -37,13 +37,19 @@ class Recommendation(APIView):
         print('user_val => ', user.val())
 
         clothType = req['type']
+        if clothType == 'tops':
+            matchType = 'bottoms'
+        else:
+            matchType = 'tops'
 
 
         ### Call the color matching algorithm
         colorTbl = colorDetect.getColorTable('./utils/color.json')
         color, rgb = colorDetect.getColor('./image/img1.png', colorTbl)
-        color = colorDetect.getColorMapping(color)
+        mapColor = colorDetect.getColorMapping(color)
+        color = color.lower()
         print('color => ', color)
+        print('mapColor => ', mapColor)
 
 
         print('#### Start ML Part ####')
@@ -62,7 +68,6 @@ class Recommendation(APIView):
             'pant_length_labels' : answer_lst[0]['pant_length_labels'],
             'sleeve_length_labels' : answer_lst[0]['sleeve_length_labels']
         }
-
         ############### ML Part End ################
 
 
@@ -76,7 +81,7 @@ class Recommendation(APIView):
         else:
             ### save the color already exists to the list
             for item in user.val()['items']:
-                if item:
+                if item and item['type'] == matchType:
                     colors_inside_wardrobe.append(item['color'])
 
             user.val()['items'].append({'color': color, 'img_url': img_url, 'type': clothType})
@@ -91,34 +96,39 @@ class Recommendation(APIView):
         for colorDbClass in color_popularity_sorted:
             p1 = colorDbClass
             print('p1.fact => ', p1.fact)
-            if color in p1.fact:
-                if color == p1.fact[0]:
+            if mapColor in p1.fact:
+                if mapColor == p1.fact[0]:
                     matchColor = p1.fact[1]
                 else:
                     matchColor = p1.fact[0]
 
                 if matchColor == '*':
-                    matchColor = colors_inside_wardrobe[0]
+                    if mapColor in colors_inside_wardrobe:
+                        colors_inside_wardrobe.remove(mapColor)
+                    matchColor = random.choice(colors_inside_wardrobe)
 
                 for item in user.val()['items']:
-                    if item and item['color'] == matchColor:
+                    if item and item['color'] == matchColor and item['type'] == matchType:
                         matchCloth = item
                         break
                 if matchCloth:
                     break
 
 
+        print('color_inside_wardrobe => ', colors_inside_wardrobe)
         if matchCloth == None:
             for nogood in color_nogood_facts:
                 print('nogood => ', nogood)
-                if color in nogood:
-                    if color == nogood[0]:
+                if mapColor in nogood:
+                    if mapColor == nogood[0] and nogood[1] in colors_inside_wardrobe:
                         colors_inside_wardrobe.remove(nogood[1])
                     else:
-                        colors_inside_wardrobe.remove(nogood[0])
+                        if nogood[0] in colors_inside_wardrobe:
+                             colors_inside_wardrobe.remove(nogood[0])
 
+            noContradictionColor = random.choice(colors_inside_wardrobe)
             for item in user.val()['items']:
-                if item and item['color'] == colors_inside_wardrobe[0]:
+                if item and item['color'] == noContradictionColor and item['type'] == matchType:
                     matchCloth = item
                     break
 
@@ -126,6 +136,7 @@ class Recommendation(APIView):
 
         req['matchCloth'] = matchCloth
 
+        #req['labels'] = {}
         req['labels']['colorPredict'] = color
 
         print('req => ', req)
