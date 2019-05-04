@@ -27,8 +27,8 @@ def predict(tasks, img_paths):
         # Load model
         saved_model = 'checkpoint/' + task + '_model.pkl'
         net = torch.load(saved_model)
-        print('net => ')
-        print(net)
+        #print('net => ')
+        #print(net)
         if torch.cuda.is_available() == True:
             net.cuda()
 

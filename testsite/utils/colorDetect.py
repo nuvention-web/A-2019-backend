@@ -76,9 +76,7 @@ def CalHSV(rgbR, rgbG, rgbB):
     maxRGB = max(rgbR, rgbG, rgbB)
     minRGB = min(rgbR, rgbG, rgbB)
 
-    hsbH = 0.0
-
-    if (rgbR == 255 and rgbG == 255 and rgbB == 255) or (rgbR == 0 and rgbG == 0 and rgbB == 0):
+    if maxRGB == minRGB:
         hsbH = 0.0
     elif maxRGB == rgbR and rgbG >= rgbB:
         hsbH = 60 * (rgbG - rgbB) / (maxRGB - minRGB)
@@ -99,10 +97,33 @@ def CalHSV(rgbR, rgbG, rgbB):
     return [hsbH, hsbS, hsbV]
 
 
+def CalColorGrade(hsv1, hsv2):
+    if abs(hsv1[0] - hsv2[0]) < 128:
+        delH = abs(hsv1[0] -  hsv2[0])
+    else:
+        delH = 256 - abs(hsv1[0] - hsv2[0])
+
+    delS = abs(hsv1[1] - hsv2[1])
+    delV = abs(hsv1[2] - hsv2[2])
+
+    return CalHueGrade(delH) + CalSaturGrade(delS) + CalVGrade(delV)
+
+def CalHueGrade(delH):
+    return -1.0 * delH / 128.0 + 1
+
+def CalSaturGrade(delS):
+    if delS <= 128:
+        return 1.0
+    else:
+        return -1.0 * delS / 128.0 + 255.0 / 128.0
+
+def CalVGrade(delV):
+    return delV / 512.0 + 0.5
+
 if __name__ == '__main__':
     colorTbl = getColorTable('color.json')
     print(colorTbl)
-    color, rgb = getColor('../image/img1.png', colorTbl)
+    color, rgb = getColor('../image/black.png', colorTbl)
     print('color => ', color)
     print('rgb => ', rgb)
 

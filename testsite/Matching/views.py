@@ -6,7 +6,6 @@ import os
 from TRE import kb
 from utils import initializeFirebase
 from utils import colorDetect
-import random
 import prediction
 
 def urllib_download(IMAGE_URL):
@@ -46,10 +45,8 @@ class Recommendation(APIView):
         ### Call the color matching algorithm
         colorTbl = colorDetect.getColorTable('./utils/color.json')
         color, rgb = colorDetect.getColor('./image/img1.png', colorTbl)
-        mapColor = colorDetect.getColorMapping(color)
-        color = color.lower()
-        print('color => ', color)
-        print('mapColor => ', mapColor)
+        hsv = colorDetect.CalHSV(rgb[0], rgb[1], rgb[2])
+
 
 
         print('#### Start ML Part ####')
@@ -69,9 +66,7 @@ class Recommendation(APIView):
             'sleeve_length_labels' : answer_lst[0]['sleeve_length_labels']
         }
         ############### ML Part End ################
-
-
-        colors_inside_wardrobe = []
+        
 
         if 'items' not in user.val():
             data = user.val()
@@ -79,64 +74,27 @@ class Recommendation(APIView):
             data.update(t_data)
             db.child("users").child(user.key()).set(data)
         else:
+            maxScore = 0.0
+            matchCloth = None
+
             ### save the color already exists to the list
             for item in user.val()['items']:
                 if item and item['type'] == matchType:
-                    colors_inside_wardrobe.append(item['color'])
+                    # colors_inside_wardrobe.append(item['color'])
+                    tcolor = item['color']
+                    rgb = colorTbl[tcolor]
+                    hsv2 = colorDetect.CalHSV(rgb[0], rgb[1], rgb[2])
+                    score = colorDetect.CalColorGrade(hsv, hsv2)
+                    if score > maxScore:
+                        maxScore = score
+                        matchCloth = item
 
             user.val()['items'].append({'color': color, 'img_url': img_url, 'type': clothType})
             db.child("users").child(user.key()).set(user.val())
 
-        kb_facts = kb.createKB()
-        color_popularity_sorted = kb_facts['color_popularity_sorted']
-        color_nogood_facts = kb_facts['color_nogood_facts']
-
-        matchCloth = None
-        ### inference part
-        for colorDbClass in color_popularity_sorted:
-            p1 = colorDbClass
-            print('p1.fact => ', p1.fact)
-            if mapColor in p1.fact:
-                if mapColor == p1.fact[0]:
-                    matchColor = p1.fact[1]
-                else:
-                    matchColor = p1.fact[0]
-
-                if matchColor == '*':
-                    if mapColor in colors_inside_wardrobe:
-                        colors_inside_wardrobe.remove(mapColor)
-                    matchColor = random.choice(colors_inside_wardrobe)
-
-                for item in user.val()['items']:
-                    if item and item['color'] == matchColor and item['type'] == matchType:
-                        matchCloth = item
-                        break
-                if matchCloth:
-                    break
-
-
-        print('color_inside_wardrobe => ', colors_inside_wardrobe)
-        if matchCloth == None:
-            for nogood in color_nogood_facts:
-                print('nogood => ', nogood)
-                if mapColor in nogood:
-                    if mapColor == nogood[0] and nogood[1] in colors_inside_wardrobe:
-                        colors_inside_wardrobe.remove(nogood[1])
-                    else:
-                        if nogood[0] in colors_inside_wardrobe:
-                             colors_inside_wardrobe.remove(nogood[0])
-
-            noContradictionColor = random.choice(colors_inside_wardrobe)
-            for item in user.val()['items']:
-                if item and item['color'] == noContradictionColor and item['type'] == matchType:
-                    matchCloth = item
-                    break
-
-        print('matchCloth => ', matchCloth)
-
         req['matchCloth'] = matchCloth
 
-        #req['labels'] = {}
+        req['labels'] = {}
         req['labels']['colorPredict'] = color
 
         print('req => ', req)
