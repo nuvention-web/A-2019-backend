@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bb516396-200e-40ea-ac55-44d708da7d18" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Matching/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Matching/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TRE/kb.py" beforeDir="false" afterPath="$PROJECT_DIR$/TRE/kb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/img1.png" beforeDir="false" afterPath="$PROJECT_DIR$/image/img1.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/colorDetect.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/colorDetect.py" afterDir="false" />
     </list>
     <ignored path="profashion-firebase-adminsdk-vf1ta-35e8761196.json" />
@@ -17,7 +14,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/testsite$ltreex1.coverage" NAME="ltreex1 Coverage Results" MODIFIED="1555813535373" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TRE" />
-    <SUITE FILE_PATH="coverage/testsite$colorDetect.coverage" NAME="colorDetect Coverage Results" MODIFIED="1556634287800" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
+    <SUITE FILE_PATH="coverage/testsite$colorDetect.coverage" NAME="colorDetect Coverage Results" MODIFIED="1556986750142" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
     <SUITE FILE_PATH="coverage/testsite$initializeFirebase.coverage" NAME="initializeFirebase Coverage Results" MODIFIED="1556333090840" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
     <SUITE FILE_PATH="coverage/testsite$MLTest.coverage" NAME="MLTest Coverage Results" MODIFIED="1556513281962" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Matching" />
     <SUITE FILE_PATH="coverage/testsite$testFirebase.coverage" NAME="testFirebase Coverage Results" MODIFIED="1556565789480" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
@@ -32,27 +29,27 @@
     <session id="137631639">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="13" />
+          <entry key="project.closed" value="15" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.3" value="7" />
-          <entry key="project.open.time.4" value="4" />
-          <entry key="project.opened" value="14" />
+          <entry key="project.open.time.4" value="6" />
+          <entry key="project.opened" value="16" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="json" value="4" />
-          <entry key="png" value="5" />
+          <entry key="json" value="5" />
+          <entry key="png" value="6" />
           <entry key="py" value="93" />
           <entry key="sqlite3" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Image" value="5" />
-          <entry key="JSON" value="4" />
+          <entry key="Image" value="6" />
+          <entry key="JSON" value="5" />
           <entry key="PLAIN_TEXT" value="3" />
           <entry key="Python" value="93" />
         </counts>
@@ -60,24 +57,24 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="json" value="3" />
-          <entry key="py" value="10158" />
+          <entry key="py" value="10948" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="3" />
-          <entry key="Python" value="10158" />
+          <entry key="Python" value="10948" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Matching/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1311">
-              <caret line="69" column="9" selection-start-line="69" selection-start-column="9" selection-end-line="69" selection-end-column="9" />
+            <state relative-caret-position="47">
+              <caret line="46" column="30" selection-start-line="46" selection-start-column="19" selection-end-line="46" selection-end-column="30" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -85,28 +82,25 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TRE/kb.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/utils/colorDetect.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="16" column="41" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
+            <state relative-caret-position="458">
+              <caret line="108" column="30" selection-start-line="108" selection-start-column="30" selection-end-line="108" selection-end-column="30" />
               <folding>
-                <marker date="1556636967212" expanded="true" signature="173:175" ph="..." />
-                <marker date="1556636967212" expanded="true" signature="1284:1285" ph="..." />
+                <element signature="e#0#10#0" expanded="true" />
+                <marker date="1556986543240" expanded="true" signature="792:3921" ph="..." />
+                <marker date="1556986543240" expanded="true" signature="3213:3921" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils/colorDetect.py">
+        <entry file="file://$PROJECT_DIR$/utils/color.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="309">
-              <caret line="51" column="26" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
-                <marker date="1556636416859" expanded="true" signature="678:2759" ph="..." />
-              </folding>
+            <state relative-caret-position="12844">
+              <caret line="676" column="9" selection-start-line="676" selection-start-column="3" selection-end-line="676" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -165,9 +159,9 @@
         <option value="$PROJECT_DIR$/prediction.py" />
         <option value="$PROJECT_DIR$/utils/testFirebase.py" />
         <option value="$PROJECT_DIR$/utils/color.json" />
-        <option value="$PROJECT_DIR$/utils/colorDetect.py" />
         <option value="$PROJECT_DIR$/TRE/kb.py" />
         <option value="$PROJECT_DIR$/Matching/views.py" />
+        <option value="$PROJECT_DIR$/utils/colorDetect.py" />
       </list>
     </option>
   </component>
@@ -322,7 +316,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Django server.testsite">
+  <component name="RunManager" selected="Python.colorDetect">
     <configuration name="MLTest" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="testsite" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -492,7 +486,7 @@
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16178267" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16544567" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -757,10 +751,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-            <marker date="1556333090834" expanded="true" signature="170:171" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -780,29 +770,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/utils/color.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5723">
+        <state relative-caret-position="12844">
           <caret line="676" column="9" selection-start-line="676" selection-start-column="3" selection-end-line="676" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/image/img1.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/colorDetect.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="51" column="26" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-            <marker date="1556636416859" expanded="true" signature="678:2759" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TRE/kb.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="16" column="41" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
+        <state relative-caret-position="201">
+          <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
           <folding>
             <marker date="1556636967212" expanded="true" signature="173:175" ph="..." />
             <marker date="1556636967212" expanded="true" signature="1284:1285" ph="..." />
@@ -812,10 +788,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Matching/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1311">
-          <caret line="69" column="9" selection-start-line="69" selection-start-column="9" selection-end-line="69" selection-end-column="9" />
+        <state relative-caret-position="47">
+          <caret line="46" column="30" selection-start-line="46" selection-start-column="19" selection-end-line="46" selection-end-column="30" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/image/img1.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/colorDetect.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="458">
+          <caret line="108" column="30" selection-start-line="108" selection-start-column="30" selection-end-line="108" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+            <marker date="1556986543240" expanded="true" signature="792:3921" ph="..." />
+            <marker date="1556986543240" expanded="true" signature="3213:3921" ph="..." />
           </folding>
         </state>
       </provider>
