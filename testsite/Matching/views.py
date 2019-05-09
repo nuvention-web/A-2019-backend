@@ -154,7 +154,7 @@ class ClothInfo(APIView):
         matchCloth = None
 
         ### save the color already exists to the list
-        for item in user.val()['items']:
+        for item in user.val()['items'].values():
             if item and item['type'] == matchType:
                 # colors_inside_wardrobe.append(item['color'])
                 tcolor = item['color']
