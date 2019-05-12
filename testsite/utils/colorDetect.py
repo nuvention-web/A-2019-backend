@@ -123,7 +123,7 @@ def CalVGrade(delV):
 if __name__ == '__main__':
     colorTbl = getColorTable('color.json')
     print(colorTbl)
-    color, rgb = getColor('../image/black.png', colorTbl)
+    color, rgb = getColor('../image/clothYellow.png', colorTbl)
     print('color => ', color)
     print('rgb => ', rgb)
 

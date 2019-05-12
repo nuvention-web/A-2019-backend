@@ -7,6 +7,7 @@ from TRE import kb
 from utils import initializeFirebase
 from utils import colorDetect
 import prediction
+import math
 
 def urllib_download(IMAGE_URL):
     from urllib.request import urlretrieve
@@ -170,5 +171,41 @@ class ClothInfo(APIView):
         req['labels']['colorPredict'] = color
 
         print('req => ', req)
+
+        return HttpResponse(json.dumps(req))
+
+class RecommendPurchase(APIView):
+    def post(self, request, *args, **kwargs):
+        jsonstr = str(request.body, 'utf-8')
+        req = json.loads(jsonstr)
+
+        matchColor = req['matchColor']
+        colorTbl = colorDetect.getColorTable('./utils/color.json')
+        if matchColor in colorTbl:
+            matchColorRGB = colorTbl[matchColor]
+        else:
+            matchColorRGB = None
+
+        minDistance = 1<<31
+        recommendCloth = None
+
+        db = initializeFirebase.initializeFB()
+        for item in db.child("purchase").get():
+            if item.val() == None:
+                continue
+            itemColor = item.val()['color']
+            if itemColor in colorTbl:
+                itemRGB = colorTbl[itemColor]
+            else:
+                itemRGB = None
+
+            distance = math.sqrt((matchColorRGB[0] - itemRGB[0]) ** 2 +\
+                                 (matchColorRGB[1] - itemRGB[1]) ** 2 +\
+                                 (matchColorRGB[2] - itemRGB[2]) ** 2)
+            if distance < minDistance:
+                minDistance = distance
+                recommendCloth = item.val()
+
+        req['recommendPurchase'] = recommendCloth
 
         return HttpResponse(json.dumps(req))
