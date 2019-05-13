@@ -179,8 +179,53 @@ class RecommendPurchase(APIView):
         jsonstr = str(request.body, 'utf-8')
         req = json.loads(jsonstr)
 
-        matchColor = req['matchColor']
+        db = initializeFirebase.initializeFB()
+
+        dbKey = req['dbkey']
+        user = None
+        for tuser in db.child("users").get():
+            if tuser.key() == dbKey:
+                user = tuser
+                break
+
+        clothID = req['clothID']
+        for item in user.val()['items'].items():
+            if item[0] == clothID:
+                cloth = item[1]
+
+        clothType = cloth['type']
+        if clothType == 'tops':
+            matchType = 'bottoms'
+        else:
+            matchType = 'tops'
+
         colorTbl = colorDetect.getColorTable('./utils/color.json')
+        clothColor = cloth['color']
+        if clothColor in colorTbl:
+            clothColorRGB = colorTbl[clothColor]
+        else:
+            clothColorRGB = None
+
+        if clothColorRGB:
+            hsv = colorDetect.CalHSV(clothColorRGB[0], clothColorRGB[1],
+                                     clothColorRGB[2])
+        maxScore = 0.0
+        matchCloth = None
+        ### save the color already exists to the list
+        for item in user.val()['items'].values():
+            if item and item['type'] == matchType:
+                # colors_inside_wardrobe.append(item['color'])
+                tcolor = item['color']
+                rgb = colorTbl[tcolor]
+                hsv2 = colorDetect.CalHSV(rgb[0], rgb[1], rgb[2])
+                score = colorDetect.CalColorGrade(hsv, hsv2)
+                if score > maxScore:
+                    maxScore = score
+                    matchCloth = item
+
+        req['matchCloth'] = matchCloth
+
+        matchColor = matchCloth['color']
         if matchColor in colorTbl:
             matchColorRGB = colorTbl[matchColor]
         else:
@@ -189,7 +234,6 @@ class RecommendPurchase(APIView):
         minDistance = 1<<31
         recommendCloth = None
 
-        db = initializeFirebase.initializeFB()
         for item in db.child("purchase").get():
             if item.val() == None:
                 continue
