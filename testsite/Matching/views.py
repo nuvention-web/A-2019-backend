@@ -7,6 +7,7 @@ from utils import initializeFirebase
 from utils import colorDetect
 import prediction
 import math
+import random
 
 def urllib_download(IMAGE_URL, USER_KEY):
     from urllib.request import urlretrieve
@@ -142,7 +143,7 @@ class RecommendPurchase(APIView):
             matchColorRGB = None
 
         minDistance = 1<<31
-        recommendCloth = None
+        allPossibleClothes = []
 
         for item in db.child("purchase").get():
             if item.val() == None:
@@ -158,8 +159,14 @@ class RecommendPurchase(APIView):
                                  (matchColorRGB[2] - itemRGB[2]) ** 2)
             if distance < minDistance and item.val()['type'] == matchType:
                 minDistance = distance
-                recommendCloth = item.val()
+                allPossibleClothes.clear()
+                allPossibleClothes.append(item.val())
+            elif distance == minDistance and item.val()['type'] == matchType:
+                allPossibleClothes.append(item.val())
 
-        req['recommendPurchase'] = recommendCloth
+        if allPossibleClothes != []:
+            req['recommendPurchase'] = random.choice(allPossibleClothes)
+        else:
+            req['recommendPurchase'] = None
 
         return HttpResponse(json.dumps(req))

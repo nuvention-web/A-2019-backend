@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bb516396-200e-40ea-ac55-44d708da7d18" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Matching/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Matching/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Matching/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Matching/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/img1.png" beforeDir="false" afterPath="$PROJECT_DIR$/image/img1.png" afterDir="false" />
     </list>
     <ignored path="profashion-firebase-adminsdk-vf1ta-35e8761196.json" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -59,13 +56,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="json" value="3" />
-          <entry key="py" value="13985" />
+          <entry key="py" value="14197" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="3" />
-          <entry key="Python" value="13985" />
+          <entry key="Python" value="14197" />
         </counts>
       </usages-collector>
     </session>
@@ -87,12 +84,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Matching/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2571">
-              <caret line="141" column="32" selection-start-line="141" selection-start-column="32" selection-end-line="141" selection-end-column="32" />
+            <state relative-caret-position="499">
+              <caret line="169" column="43" selection-start-line="169" selection-start-column="43" selection-end-line="169" selection-end-column="43" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
-                <marker date="1558762369110" expanded="true" signature="408:409" ph="..." />
-                <marker date="1558762369110" expanded="true" signature="3229:3234" ph="..." />
+                <marker date="1558764234467" expanded="true" signature="422:423" ph="..." />
+                <marker date="1558764234467" expanded="true" signature="3243:3248" ph="..." />
               </folding>
             </state>
           </provider>
@@ -849,12 +846,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Matching/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2571">
-          <caret line="141" column="32" selection-start-line="141" selection-start-column="32" selection-end-line="141" selection-end-column="32" />
+        <state relative-caret-position="499">
+          <caret line="169" column="43" selection-start-line="169" selection-start-column="43" selection-end-line="169" selection-end-column="43" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
-            <marker date="1558762369110" expanded="true" signature="408:409" ph="..." />
-            <marker date="1558762369110" expanded="true" signature="3229:3234" ph="..." />
+            <marker date="1558764234467" expanded="true" signature="422:423" ph="..." />
+            <marker date="1558764234467" expanded="true" signature="3243:3248" ph="..." />
           </folding>
         </state>
       </provider>
