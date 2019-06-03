@@ -8,6 +8,7 @@ from utils import colorDetect
 import prediction
 import math
 import random
+from utils import weather
 
 def urllib_download(IMAGE_URL, USER_KEY):
     from urllib.request import urlretrieve
@@ -170,3 +171,7 @@ class RecommendPurchase(APIView):
             req['recommendPurchase'] = None
 
         return HttpResponse(json.dumps(req))
+
+class WeatherInfo(APIView):
+    def post(self, request, *args, **kwargs):
+        return HttpResponse(json.dumps(weather.getWeatherInfo()))
