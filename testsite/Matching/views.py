@@ -42,13 +42,13 @@ class ClothInfo(APIView):
 
         ### Call the color matching algorithm
         colorTbl = colorDetect.getColorTable('./utils/color.json')
-        color, rgb = colorDetect.getColor('./image/img1.png', colorTbl)
+        color, rgb = colorDetect.getColor('./image/' + user.key() + '.png', colorTbl)
         hsv = colorDetect.CalHSV(rgb[0], rgb[1], rgb[2])
 
         print('#### Start ML Part ####')
         answer_lst = prediction.predict(["collar_design_labels", "skirt_length_labels", "coat_length_labels",
                                          "lapel_design_labels", "neck_design_labels", "neckline_design_labels",
-                                         "pant_length_labels", "sleeve_length_labels"], ["./image/img1.png"])
+                                         "pant_length_labels", "sleeve_length_labels"], ["./image/"+ user.key() +".png"])
         print('answer_lst => ', answer_lst)
 
         req['labels'] = {
@@ -66,10 +66,11 @@ class ClothInfo(APIView):
         maxScore = 0.0
         matchCloth = None
 
-        ### save the color already exists to the list
+        ### Matching Clothes ALG
+        temperature = weather.getWeatherInfo()
+
         for item in user.val()['items'].values():
             if item and item['type'] == matchType:
-                # colors_inside_wardrobe.append(item['color'])
                 tcolor = item['color']
                 rgb = colorTbl[tcolor]
                 hsv2 = colorDetect.CalHSV(rgb[0], rgb[1], rgb[2])
@@ -119,6 +120,7 @@ class RecommendPurchase(APIView):
         else:
             clothColorRGB = None
 
+        hsv = None
         if clothColorRGB:
             hsv = colorDetect.CalHSV(clothColorRGB[0], clothColorRGB[1],
                                      clothColorRGB[2])
@@ -128,7 +130,8 @@ class RecommendPurchase(APIView):
         for item in user.val()['items'].values():
             if item and item['type'] == matchType:
                 tcolor = item['color']
-                rgb = colorTbl[tcolor]
+                if tcolor != None:
+                    rgb = colorTbl[tcolor]
                 hsv2 = colorDetect.CalHSV(rgb[0], rgb[1], rgb[2])
                 score = colorDetect.CalColorGrade(hsv, hsv2)
                 if score > maxScore:
@@ -173,5 +176,5 @@ class RecommendPurchase(APIView):
         return HttpResponse(json.dumps(req))
 
 class WeatherInfo(APIView):
-    def post(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         return HttpResponse(json.dumps(weather.getWeatherInfo()))

@@ -1,5 +1,5 @@
 import pyrebase
-from utils import FirebaseConfig
+from utils import firebaseConfig
 
 # Temporarily replace quote function
 def noquote(s):
@@ -7,7 +7,7 @@ def noquote(s):
 pyrebase.pyrebase.quote = noquote
 
 def initializeFB():
-    firebase = pyrebase.initialize_app(FirebaseConfig.config)
+    firebase = pyrebase.initialize_app(firebaseConfig.config)
     #print('firebase => ', firebase)
 
     db = firebase.database()
