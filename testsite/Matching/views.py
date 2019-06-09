@@ -9,6 +9,7 @@ import prediction
 import math
 import random
 from utils import weather
+from utils import clothMatching
 
 def urllib_download(IMAGE_URL, USER_KEY):
     from urllib.request import urlretrieve
@@ -63,23 +64,9 @@ class ClothInfo(APIView):
         }
         ############### ML Part End ################
 
-        maxScore = 0.0
-        matchCloth = None
-
         ### Matching Clothes ALG
         temperature = weather.getWeatherInfo()
-
-        for item in user.val()['items'].values():
-            if item and item['type'] == matchType:
-                tcolor = item['color']
-                rgb = colorTbl[tcolor]
-                hsv2 = colorDetect.CalHSV(rgb[0], rgb[1], rgb[2])
-                score = colorDetect.CalColorGrade(hsv, hsv2)
-                if score > maxScore:
-                    maxScore = score
-                    matchCloth = item
-
-        req['matchCloth'] = matchCloth
+        req['matchCloth'] = clothMatching.selectMatchCloth(user, temperature, hsv, matchType, colorTbl)
 
         req['labels']['colorPredict'] = color
 
