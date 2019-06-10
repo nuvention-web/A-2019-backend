@@ -165,3 +165,33 @@ class RecommendPurchase(APIView):
 class WeatherInfo(APIView):
     def get(self, request, *args, **kwargs):
         return HttpResponse(json.dumps(weather.getWeatherInfo()))
+
+class GetDailyOutfit(APIView):
+    def post(self, request, *args, **kwargs):
+        jsonstr = str(request.body, 'utf-8')
+        req = json.loads(jsonstr)
+
+        db = initializeFirebase.initializeFB()
+
+        dbKey = req['dbkey']
+        user = None
+        for tuser in db.child("users").get():
+            if tuser.key() == dbKey:
+                user = tuser
+                break
+
+        colorTbl = colorDetect.getColorTable('./utils/color.json')
+
+        [formalDress, semiformalDress, casualDress] = clothMatching.calOccasionScore(user, colorTbl)
+
+        print('formlDress => ', formalDress)
+        print('semiformalDress => ', semiformalDress)
+        print('casualDress => ', casualDress)
+
+        req['formalDressTop'] = formalDress[0]
+        req['formalDressBottom'] = formalDress[1]
+        req['semiformalDressTop'] = semiformalDress[0]
+        req['semiformalDressBottom'] = semiformalDress[1]
+        req['casualDressTop'] = casualDress[0]
+        req['casualDressBottom'] = casualDress[1]
+        return HttpResponse(json.dumps(req))

@@ -1,4 +1,5 @@
 from utils import colorDetect
+from utils import weather
 
 
 def selectMatchCloth(user, temperature, hsv, matchType, colorTbl):
@@ -21,7 +22,7 @@ def selectMatchCloth(user, temperature, hsv, matchType, colorTbl):
                 maxScore = score
                 matchCloth = item
 
-    return matchCloth
+    return matchCloth, maxScore
 
 
 def calWeatherScore(user, temperature, matchType):
@@ -243,3 +244,59 @@ def calWeatherScore(user, temperature, matchType):
                         possible_answer[key] += 10.0
 
     return possible_answer
+
+def calScoreBetweenClothes(cloth, matchCloth, type):
+    score = 0
+    if type == 'formal':
+        if 'lapel_design' in cloth:
+            if cloth['lapel_design'] == 'Shawl Collar':
+                score = 10.0
+    elif type == 'semiformal':
+        if 'lapel_design' in cloth:
+            if cloth['lapel_design'] == 'Notched':
+                score = 10.0
+    elif type == 'casual':
+        if 'lapel_design' in cloth:
+            if (cloth['lapel_design'] == 'Collarless'
+                or cloth['lapel_design'] == 'Plus Size Shawl'):
+                score = 10.0
+
+    return score
+
+
+def calOccasionScore(user, colorTbl):
+    formal = -1
+    formalDress = []
+    semiformal = -1
+    semiformalDress = []
+    casual = -1
+    casualDress = []
+    temperature = weather.getWeatherInfo()
+
+    for key, item in user.val()['items'].items():
+        if item == None:
+            continue
+        if item['type'] == 'tops':
+            print('is it here???')
+            tcolor = item['color']
+            rgb = colorTbl[tcolor]
+            hsv = colorDetect.CalHSV(rgb[0], rgb[1], rgb[2])
+            matchCloth, matchScore = selectMatchCloth(user, temperature, hsv, 'bottoms', colorTbl)
+
+            tmpFormal = calScoreBetweenClothes(item, matchCloth, 'formal')
+            tmpSemiFormal = calScoreBetweenClothes(item, matchCloth, 'semiformal')
+            tmpCasual = calScoreBetweenClothes(item, matchCloth, 'casual')
+
+            if tmpFormal > formal or formal == -1:
+                formal = tmpFormal
+                formalDress = [item, matchCloth]
+
+            if tmpSemiFormal > semiformal or semiformal == -1:
+                semiformal = tmpSemiFormal
+                semiformalDress = [item, matchCloth]
+
+            if tmpCasual > casual or casual == -1:
+                casual = tmpCasual
+                casualDress = [item, matchCloth]
+
+    return [formalDress, semiformalDress, casualDress]
