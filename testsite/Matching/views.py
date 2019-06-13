@@ -184,14 +184,11 @@ class GetDailyOutfit(APIView):
 
         [formalDress, semiformalDress, casualDress] = clothMatching.calOccasionScore(user, colorTbl)
 
-        print('formlDress => ', formalDress)
-        print('semiformalDress => ', semiformalDress)
-        print('casualDress => ', casualDress)
-
         req['formalDressTop'] = formalDress[0]
         req['formalDressBottom'] = formalDress[1]
         req['semiformalDressTop'] = semiformalDress[0]
         req['semiformalDressBottom'] = semiformalDress[1]
-        req['casualDressTop'] = casualDress[0]
-        req['casualDressBottom'] = casualDress[1]
+        req['casualDressTop'] = casualDress[0][0]
+        req['casualDressBottom'] = casualDress[1][0]
+
         return HttpResponse(json.dumps(req))

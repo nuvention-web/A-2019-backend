@@ -1,11 +1,11 @@
 from utils import colorDetect
 from utils import weather
+import random
 
 
 def selectMatchCloth(user, temperature, hsv, matchType, colorTbl):
 
     possible_answer = calWeatherScore(user, temperature, matchType)
-    print('possible-answer =>', possible_answer)
 
     matchCloth = None
     maxScore = 0.0
@@ -251,15 +251,34 @@ def calScoreBetweenClothes(cloth, matchCloth, type):
         if 'lapel_design' in cloth:
             if cloth['lapel_design'] == 'Shawl Collar':
                 score = 10.0
+        if 'pant_length' in matchCloth:
+            if matchCloth['pant_length'] == 'Full Length':
+                score += 10.0
+            elif matchCloth['pant_length'] == 'Cropped Pant':
+                score += 9.0
+
     elif type == 'semiformal':
         if 'lapel_design' in cloth:
             if cloth['lapel_design'] == 'Notched':
                 score = 10.0
+        if 'pant_length' in matchCloth:
+            if matchCloth['pant_length'] == 'Full Length':
+                score += 8.0
+            elif matchCloth['pant_length'] == 'Cropped Pant':
+                score += 10.0
+
     elif type == 'casual':
         if 'lapel_design' in cloth:
             if (cloth['lapel_design'] == 'Collarless'
                 or cloth['lapel_design'] == 'Plus Size Shawl'):
                 score = 10.0
+        if 'pant_length' in matchCloth:
+            if matchCloth['pant_length'] == 'Full Length':
+                score += 5.0
+            elif matchCloth['pant_length'] == 'Cropped Pant':
+                score += 7.0
+            elif matchCloth['pant_length'] == 'Short Pant':
+                score += 10.0
 
     return score
 
@@ -267,21 +286,27 @@ def calScoreBetweenClothes(cloth, matchCloth, type):
 def calOccasionScore(user, colorTbl):
     formal = -1
     formalDress = []
+    formalTop = []
+    formalBottoms = []
     semiformal = -1
     semiformalDress = []
+    semiformalTop = []
+    semiformalBottoms = []
     casual = -1
     casualDress = []
+    casualDressTop = []
+    casualDressBottoms = []
     temperature = weather.getWeatherInfo()
 
     for key, item in user.val()['items'].items():
         if item == None:
             continue
         if item['type'] == 'tops':
-            print('is it here???')
             tcolor = item['color']
             rgb = colorTbl[tcolor]
             hsv = colorDetect.CalHSV(rgb[0], rgb[1], rgb[2])
             matchCloth, matchScore = selectMatchCloth(user, temperature, hsv, 'bottoms', colorTbl)
+
 
             tmpFormal = calScoreBetweenClothes(item, matchCloth, 'formal')
             tmpSemiFormal = calScoreBetweenClothes(item, matchCloth, 'semiformal')
@@ -289,14 +314,51 @@ def calOccasionScore(user, colorTbl):
 
             if tmpFormal > formal or formal == -1:
                 formal = tmpFormal
-                formalDress = [item, matchCloth]
+                formalTop.clear()
+                formalTop.append(item)
+                formalBottoms.clear()
+                formalBottoms.append(matchCloth)
+                formalDress = [formalTop, formalBottoms]
+            elif tmpFormal == formal:
+                formalTop.append(item)
+                formalBottoms.append(matchCloth)
+                formalDress = [formalTop, formalBottoms]
 
             if tmpSemiFormal > semiformal or semiformal == -1:
                 semiformal = tmpSemiFormal
-                semiformalDress = [item, matchCloth]
+                semiformalTop.clear()
+                semiformalTop.append(item)
+                semiformalBottoms.clear()
+                semiformalBottoms.append(matchCloth)
+                semiformalDress = [semiformalTop, semiformalBottoms]
+            elif tmpSemiFormal == semiformal:
+                semiformalTop.append(item)
+                semiformalBottoms.append(matchCloth)
+                semiformalDress = [semiformalTop, semiformalBottoms]
 
             if tmpCasual > casual or casual == -1:
                 casual = tmpCasual
-                casualDress = [item, matchCloth]
+                casualDressTop.clear()
+                casualDressTop.append(item)
+                casualDressBottoms.clear()
+                casualDressBottoms.append(matchCloth)
+                casualDress = [casualDressTop, casualDressBottoms]
+            elif tmpCasual == casual:
+                casualDressTop.append(item)
+                casualDressBottoms.append(matchCloth)
+                casualDress = [casualDressTop, casualDressBottoms]
+
+
+    if len(formalDress[0]) > 1:
+        randInt = random.randint(0, len(formalDress[0])-1)
+        formalDress = [formalTop[randInt], formalBottoms[randInt]]
+
+    if len(semiformalDress[0]) > 1:
+        randInt = random.randint(0, len(semiformalDress[0])-1)
+        semiformalDress = [semiformalTop[randInt], semiformalBottoms[randInt]]
+
+    if len(casualDress[0]) > 1:
+        randInt = random.randint(0, len(casualDress[0]) - 1)
+        casualDress = [casualDressTop[randInt], casualDressBottoms[randInt]]
 
     return [formalDress, semiformalDress, casualDress]
