@@ -6,7 +6,7 @@
 * The backend will use this color result to match the good facts in our kb, 
 and see if there is good matching color, and if there exists matching color, then we try to find whether there 
 exists such cloth that has this color. If not, then we just randomly recommend the clothes to the user based on 
-other contraints we have in our kb. And currently our constraints are based on the weather, occasion, color and what clothes the user already has in their wardrobe.
+other contraints we have in our knowledge base. And currently our constraints are based on the weather, occasion, color and what clothes the user already has in their wardrobe.
 
 ## Installation
 ### Configure AMS Server
@@ -38,5 +38,6 @@ $ nohup python manage.py runserver 0:8000 &
 ```
 
 ## Contact
-* If you need our AWS Server account information or there is problem running the server, please contact:
+If you need our AWS Server account information or there is problem running the server, please contact:
+
 Chenghong Lin <ChenghongLin2020@u.northwestern.edu >
